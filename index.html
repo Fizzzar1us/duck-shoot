@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		.itemsOnStage{
+			position: absolute;
+		}
+		.duck{
+			height: 100px;
+			width: 100px;
+			position: absolute;
+			border-radius:  40%;
+			z-index: 2;
+			top: px;
+			left: px;
+		}
+		.scoree{
+			position: absolute;
+			width: 150px;
+			height: 100px;
+			top: 100px;
+			left: 700px;
+			background-color: gray;
+		}
+		.playBtn{
+			width: 100px;
+			color: white;
+			background-color: red;
+			margin-left: auto;
+			position: absolute;
+			left: 47%;
+			top: 50px;
+			text-align: center;
+			padding: 20px 40px;
+			border-radius: 10px;
+			border: 3px solid #f0f0f0;
+			transition: 0.5s;
+			box-shadow: 13px 10px 21px 1px rgba(255, 74, 74, 0.27);
+		}
+	</style>
+</head>
+<body>
+	<div class="playBtn">Начать игру</div>
+	<div class="scoree"><span style="font-size: 100px;"class="scoreTag"></span></div>
+	<div class="itemsOnStage" style="top: 400px; left: 275px; height: 100px; width: 1500px; background-image: url(wave1.png);"></div>
+	<div class="itemsOnStage" style="top: 600px; left: 275px; height: 100px; width: 1500px; background-image: url(wave2.png);"></div>
+	<div class="itemsOnStage" style="top: 800px; left: 275px; height: 100px; width: 1500px; background-image: url(wave3.png);"></div>
+
+
+	<div class="itemsOnStage" style="height: 1000px; width: 300px; background-image: url(1s.png); background-size: 100%;"></div>
+	<div class="itemsOnStage" style="height: 1000px; width: 300px; background-image: url(2s.png); background-size: 100%; left: 1740px;"></div>
+	<script type="text/javascript">
+		let stopCreate
+		let wavesTop= [300,500,700];
+		let score = 0;
+		let scoreTag = document.querySelector(".scoreTag")
+		let btn = document.querySelector(".playBtn")
+		btn.onclick = function(){
+			setTimeout(itog, 20000,);
+
+			stopCreate = setInterval(createDuck,250);
+			btn.style.display = "none"
+		}
+		let createDuck = function(){
+			let duck = document.createElement("div");
+			document.body.appendChild(duck);
+			duck.classList.add("duck");
+			duck.style.top = wavesTop[random(2)] + "px";
+			duck.style.left = random(1500) + "px";
+			duck.onclick = function(){
+				if (duck.name == 'good') {
+					score = score + 1
+					if (score>=70) {
+						alert("Ты победил")
+					}
+				} else if(duck.name == "bad"){
+					score = score - 2
+					if (score>=70) {
+						alert("Ты победил")
+					}
+				}
+				else {
+					score = score + 2
+					if (score>=70) {
+						alert("Ты победил")
+					}
+				}
+				duck.style.display = 'none';
+				duck.style.display = "none"
+				scoreTag.innerHTML = score
+			}
+		if(random(2)==0){
+			duck.style.backgroundImage = 'url(1.png)'
+			duck.name = "norm";
+			duck.style.backgroundSize = "100% 100%"
+		}
+		else if(random(2)==1){
+			duck.style.backgroundImage = 'url(2.png)'
+			duck.name = "good";
+			duck.style.backgroundSize = "100% 100%"
+		}
+		else if(random(2)==2){
+			duck.style.backgroundImage = 'url(3.png)'
+			duck.name = "bad"
+			duck.style.backgroundSize = "100% 100%"
+		}
+	
+
+	
+
+		}
+		
+		
+		let random = function(arg){
+			let random = Math.round(Math.random()*arg)
+			return random;
+		}
+		
+
+		let itog = function(){
+			clearInterval(stopCreate);
+			alert("ты проиграл")
+		}
+
+	</script>
+</body>
+</html>
